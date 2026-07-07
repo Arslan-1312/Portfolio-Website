@@ -1,0 +1,63 @@
+/* CSS variables for customizable theme support */
+
+:root {
+  /* Light Mode Colors (Red, Green, Dark Yellow) */
+  --bg-color: #ffffff; /* Clean white background */
+  --bg-slate-950: #f8fafc; /* Very light slate for sections */
+  
+  --text-main: #0f172a; /* Slate 900 */
+  --text-secondary: #334155; /* Slate 700 */
+  --text-muted: #64748b; /* Slate 500 */
+  
+  --card-bg: rgba(255, 255, 255, 0.75);
+  --card-border: rgba(15, 23, 42, 0.08);
+  --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.03);
+  --card-hover-border: rgba(220, 38, 38, 0.3); /* Red border on hover */
+  --card-hover-shadow: 0 20px 40px -15px rgba(220, 38, 38, 0.12);
+
+  /* Primary accents for Light mode */
+  --theme-primary-blue: #dc2626; /* Red */
+  --theme-primary-purple: #16a34a; /* Green */
+  --theme-primary-cyan: #ca8a04; /* Dark Yellow */
+  
+  --particle-color-1: rgba(220, 38, 38, 0.15); /* Red particles */
+  --particle-color-2: rgba(22, 163, 74, 0.15); /* Green particles */
+  --particle-color-3: rgba(202, 138, 4, 0.15); /* Yellow particles */
+  
+  --scrollbar-bg: #f8fafc;
+  --scrollbar-thumb: rgba(220, 38, 38, 0.2);
+  --scrollbar-thumb-hover: rgba(220, 38, 38, 0.45);
+  
+  --blob-opacity: 0.15;
+}
+
+:root.dark {
+  /* Dark Mode Colors (Black and Dark Yellow) */
+  --bg-color: #000000; /* Pure Black background */
+  --bg-slate-950: #0a0a0a; /* Very dark gray for sections */
+  
+  --text-main: #ffffff; /* Pure white text */
+  --text-secondary: #cbd5e1; /* Slate 300 */
+  --text-muted: #94a3b8; /* Slate 400 */
+  
+  --card-bg: rgba(10, 10, 10, 0.6);
+  --card-border: rgba(255, 255, 255, 0.05);
+  --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  --card-hover-border: rgba(234, 179, 8, 0.3); /* Dark Yellow border on hover */
+  --card-hover-shadow: 0 20px 40px -15px rgba(234, 179, 8, 0.2);
+
+  /* Primary accents for Dark mode (Variations of Dark Yellow) */
+  --theme-primary-blue: #b45309; /* Amber 700 (Very Dark Yellow) */
+  --theme-primary-purple: #ca8a04; /* Yellow 600 (Dark Yellow) */
+  --theme-primary-cyan: #eab308; /* Yellow 500 (Medium Yellow) */
+  
+  --particle-color-1: rgba(234, 179, 8, 0.12);
+  --particle-color-2: rgba(202, 138, 4, 0.12);
+  --particle-color-3: rgba(180, 83, 9, 0.12);
+  
+  --scrollbar-bg: #000000;
+  --scrollbar-thumb: rgba(234, 179, 8, 0.25);
+  --scrollbar-thumb-hover: rgba(234, 179, 8, 0.5);
+  
+  --blob-opacity: 0.25;
+}
