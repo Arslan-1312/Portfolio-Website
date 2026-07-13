@@ -25,22 +25,13 @@ export const education = [
 ];
 
 export const experiences = [
-  {
-    role: 'Front-End Development Intern',
-    company: 'Hazara University, Mansehra',
-    duration: 'Jan 2026 – Jun 2026',
+   {
+    role: 'Full-Stack Web Developer',
+    company: 'FIVED ',
+    duration: '2024 – 2025',
     bullets: [
-      'Developed Hazara University website UI using React.js and Tailwind CSS.',
-      'Built reusable, highly performant, and responsive UI components.',
-    ],
-  },
-  {
-    role: 'Digital Campaign Analyst',
-    company: 'Hackta Connect Pvt Ltd',
-    duration: 'Dec 2025 – Jan 2026',
-    bullets: [
-      'Monitored ad performance metrics and analyzed user conversion funnels.',
-      'Supported integration of tracking scripts and custom campaign landing pages.',
+      'Developed full-stack web applications using MongoDB, Express, React, and Node.',
+      'Created custom WordPress websites and integrated responsive client interfaces.',
     ],
   },
   {
@@ -52,15 +43,26 @@ export const experiences = [
       'Collaborated with developers to integrate UI components with backend APIs.',
     ],
   },
+ 
   {
-    role: 'Freelance MERN Stack Developer',
-    company: 'Self-Employed',
-    duration: '2024 – Present',
+    role: 'Digital Campaign Analyst',
+    company: 'Hackta Connect Pvt Ltd',
+    duration: 'Dec 2025 – Jan 2026',
     bullets: [
-      'Developed full-stack web applications using MongoDB, Express, React, and Node.',
-      'Created custom WordPress websites and integrated responsive client interfaces.',
+      'Monitored ad performance metrics and analyzed user conversion funnels.',
+      'Supported integration of tracking scripts and custom campaign landing pages.',
     ],
   },
+ {
+    role: 'Front-End Development Intern',
+    company: 'Hazara University, Mansehra',
+    duration: 'Jan 2026 – Jun 2026',
+    bullets: [
+      'Developed Hazara University website UI using React.js and Tailwind CSS.',
+      'Built reusable, highly performant, and responsive UI components.',
+    ],
+  },
+ 
 ];
 
 export const projectsData = [

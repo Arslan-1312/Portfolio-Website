@@ -1,34 +1,44 @@
-/* CSS variables for customizable theme support */
+/* ─────────────────────────────────────────────────────────────
+   CSS Design Tokens — Professional Dual-Theme System
+   Light  → Indigo / Violet / Cyan  (Refined, Trustworthy)
+   Dark   → Amber / Yellow          (Rich, High-contrast)
+   ───────────────────────────────────────────────────────────── */
 
 :root {
-  /* Light Mode Colors (Red, Green, Dark Yellow) */
-  --bg-color: #ffffff; /* Clean white background */
-  --bg-slate-950: #f8fafc; /* Very light slate for sections */
-  
-  --text-main: #0f172a; /* Slate 900 */
-  --text-secondary: #334155; /* Slate 700 */
-  --text-muted: #64748b; /* Slate 500 */
-  
-  --card-bg: rgba(255, 255, 255, 0.75);
-  --card-border: rgba(15, 23, 42, 0.08);
-  --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.03);
-  --card-hover-border: rgba(220, 38, 38, 0.3); /* Red border on hover */
-  --card-hover-shadow: 0 20px 40px -15px rgba(220, 38, 38, 0.12);
+  /* ── Surfaces ── */
+  --bg-color:      #f5f6fa;   /* Soft off-white — not glaring pure white  */
+  --bg-slate-950:  #eef0f6;   /* Slightly deeper surface for section bands */
 
-  /* Primary accents for Light mode */
-  --theme-primary-blue: #dc2626; /* Red */
-  --theme-primary-purple: #16a34a; /* Green */
-  --theme-primary-cyan: #ca8a04; /* Dark Yellow */
-  
-  --particle-color-1: rgba(220, 38, 38, 0.15); /* Red particles */
-  --particle-color-2: rgba(22, 163, 74, 0.15); /* Green particles */
-  --particle-color-3: rgba(202, 138, 4, 0.15); /* Yellow particles */
-  
-  --scrollbar-bg: #f8fafc;
-  --scrollbar-thumb: rgba(220, 38, 38, 0.2);
-  --scrollbar-thumb-hover: rgba(220, 38, 38, 0.45);
-  
-  --blob-opacity: 0.15;
+  /* ── Typography ── */
+  --text-main:      #0f172a;   /* Near-black — maximum legibility           */
+  --text-secondary: #374151;   /* Cool gray-700 — comfortable body copy      */
+  --text-muted:     #6b7280;   /* Gray-500 — metadata / timestamps           */
+
+  /* ── Card System ── */
+  --card-bg:           rgba(255, 255, 255, 0.82);   /* White glass panel              */
+  --card-border:       rgba(79, 70, 229, 0.10);     /* Indigo-tinted subtle edge       */
+  --card-shadow:       0 2px 8px 0 rgba(15, 23, 42, 0.06),
+                       0 12px 32px -8px rgba(79, 70, 229, 0.08);
+  --card-hover-border: rgba(79, 70, 229, 0.30);     /* Richer indigo ring on hover     */
+  --card-hover-shadow: 0 20px 48px -12px rgba(79, 70, 229, 0.18);
+
+  /* ── Accent Palette — Indigo / Violet / Cyan ── */
+  --theme-primary-blue:   #4f46e5;  /* Indigo-600  — primary CTA & links       */
+  --theme-primary-purple: #7c3aed;  /* Violet-600  — secondary accents          */
+  --theme-primary-cyan:   #0891b2;  /* Cyan-600    — tertiary / code highlights */
+
+  /* ── Interactive Particles ── */
+  --particle-color-1: rgba(79, 70, 229, 0.12);   /* Indigo particles   */
+  --particle-color-2: rgba(124, 58, 237, 0.10);  /* Violet particles   */
+  --particle-color-3: rgba(8, 145, 178, 0.10);   /* Cyan particles     */
+
+  /* ── Scrollbar ── */
+  --scrollbar-bg:         #eef0f6;
+  --scrollbar-thumb:      rgba(79, 70, 229, 0.22);
+  --scrollbar-thumb-hover:rgba(79, 70, 229, 0.45);
+
+  /* ── Ambient Blob Opacity ── */
+  --blob-opacity: 0.12;
 }
 
 :root.dark {

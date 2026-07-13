@@ -46,28 +46,42 @@ const skillCategories = [
   },
 ]
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-}
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-}
-
 export default function Skills() {
+  // Cascades entry of categories sequentially when scrolling into view
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.1, // Stagger offset between categories
+      },
+    },
+  }
+
+  // Spring animations for category cards
+  const cardVariants = {
+    hidden: { opacity: 0, y: 35 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 100,
+        damping: 16,
+      },
+    },
+  }
+
   return (
     <section id="skills" className="relative py-20 px-4 md:px-8 overflow-hidden z-10">
       <div className="max-w-7xl mx-auto">
 
-        {/* Section Heading */}
+        {/* Section Heading Area */}
         <div className="flex flex-col items-center text-center mb-16">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
             className="text-xs font-bold uppercase tracking-widest text-primary-cyan"
           >
             Capabilities
@@ -76,7 +90,7 @@ export default function Skills() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
             className="text-3xl sm:text-4xl font-extrabold text-white mt-2"
           >
             My Tech Stack & Skills
@@ -85,12 +99,12 @@ export default function Skills() {
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.2, type: 'spring' }}
             className="w-16 h-1 bg-gradient-to-r from-primary-cyan via-primary-blue to-primary-purple mt-4 rounded-full"
           />
         </div>
 
-        {/* Skills Cards Grid */}
+        {/* Skills Category Cards Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -102,14 +116,21 @@ export default function Skills() {
             <motion.div
               key={idx}
               variants={cardVariants}
-              whileHover={{ y: -8, scale: 1.03 }}
+              // Hover effect: slides card upwards and increases scale with responsive spring dynamics
+              whileHover={{ 
+                y: -10, 
+                scale: 1.03,
+                transition: { type: 'spring', stiffness: 300, damping: 15 }
+              }}
+              style={{ willChange: 'transform, opacity' }} // Forces GPU optimization path
               className="glass-card p-6 rounded-2xl relative overflow-hidden transition-all duration-300 border-white/5 shadow-xl flex flex-col items-start text-left group"
             >
-              {/* Ambient light */}
+              {/* Decorative radial blur atmosphere backdrop appearing on card hover */}
               <div className={`absolute -top-16 -right-16 w-32 h-32 rounded-full bg-gradient-to-br ${category.color} blur-2xl opacity-40 group-hover:opacity-100 transition-opacity duration-500`} />
 
               <div className="flex items-center space-x-3 mb-6 z-10">
-                <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 group-hover:bg-slate-900 group-hover:scale-110 transition-all duration-300">
+                {/* Glowing icon border that rotates slightly on card hover */}
+                <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 group-hover:bg-slate-900 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                   <category.Icon className={`w-6 h-6 ${category.iconColor}`} />
                 </div>
                 <h4 className="text-xl font-bold text-white group-hover:text-primary-cyan transition-colors">
@@ -117,12 +138,12 @@ export default function Skills() {
                 </h4>
               </div>
 
-              {/* Skills Badges */}
+              {/* Skills Badges container */}
               <div className="flex flex-wrap gap-2.5 w-full z-10">
                 {category.skills.map((skill, sIdx) => (
                   <span
                     key={sIdx}
-                    className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-300 bg-white/5 border border-white/5 hover:border-primary-purple/30 hover:bg-white/10 hover:text-white transition-all cursor-default"
+                    className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-300 bg-white/5 border border-white/5 hover:border-primary-purple/40 hover:bg-white/10 hover:text-white transition-all duration-200 cursor-default"
                   >
                     {skill}
                   </span>
@@ -136,3 +157,4 @@ export default function Skills() {
     </section>
   )
 }
+

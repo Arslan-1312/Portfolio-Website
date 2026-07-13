@@ -2,53 +2,65 @@ import { useEffect, useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 export default function CustomCursor() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
+  const [isVisible,  setIsVisible]  = useState(false)
+  const [isHovered,  setIsHovered]  = useState(false)
   const [isClicking, setIsClicking] = useState(false)
 
+  // Read whether we're in dark mode to pick the right cursor color
+  const [isDark, setIsDark] = useState(
+    () => document.documentElement.classList.contains('dark')
+  )
+
+  useEffect(() => {
+    // Watch for theme class changes on <html> so cursor color updates instantly
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'))
+    })
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => observer.disconnect()
+  }, [])
+
+  // Cursor accent: yellow in dark, indigo in light
+  const accent      = isDark ? '#FACC15' : '#4f46e5'
+  const accentDim   = isDark ? '#EAB308' : '#6d62f5'
+  const accentAlpha = isDark ? 'rgba(250,204,21,0.15)' : 'rgba(79,70,229,0.12)'
+
+  // Raw mouse position values (no easing — pure pixel coordinates)
   const mouseX = useMotionValue(-100)
   const mouseY = useMotionValue(-100)
 
-  const springConfig = { damping: 30, stiffness: 350, mass: 0.3 }
-  const cursorX = useSpring(mouseX, springConfig)
-  const cursorY = useSpring(mouseY, springConfig)
+  // Outer ring uses looser springs so it lags slightly behind — creates a trailing effect
+  const ringSpring = { damping: 28, stiffness: 280, mass: 0.35 }
+  const ringX = useSpring(mouseX, ringSpring)
+  const ringY = useSpring(mouseY, ringSpring)
 
   useEffect(() => {
+    // Track raw mouse coordinates
     const moveCursor = (e) => {
       mouseX.set(e.clientX)
       mouseY.set(e.clientY)
-      // Only set visible to true once to avoid calling setState on every single mousemove
-      setIsVisible((prev) => {
-        if (!prev) return true
-        return prev
-      })
+      setIsVisible((prev) => prev || true)
     }
 
-    const handleMouseLeave = () => setIsVisible(false)
-    const handleMouseEnter = () => setIsVisible(true)
+    const handleMouseLeave  = () => setIsVisible(false)
+    const handleMouseEnter  = () => setIsVisible(true)
+    const handleMouseDown   = () => setIsClicking(true)
+    const handleMouseUp     = () => setIsClicking(false)
 
+    // Detect when cursor is over an interactive element and expand the ring
     const handleMouseOver = (e) => {
       const target = e.target
       if (!target) return
-
       const isHover = !!(
-        target.tagName === 'A' ||
-        target.tagName === 'BUTTON' ||
-        target.closest('a') ||
-        target.closest('button') ||
+        target.tagName === 'A'        || target.tagName === 'BUTTON'    ||
+        target.closest('a')           || target.closest('button')       ||
         target.closest('[role="button"]') ||
-        target.tagName === 'INPUT' ||
-        target.tagName === 'TEXTAREA' ||
-        target.closest('input') ||
-        target.closest('textarea')
+        target.tagName === 'INPUT'    || target.tagName === 'TEXTAREA'  ||
+        target.closest('input')       || target.closest('textarea')
       )
       setIsHovered(isHover)
     }
 
-    const handleMouseDown = () => setIsClicking(true)
-    const handleMouseUp = () => setIsClicking(false)
-
-    // Scroll listener to re-evaluate what is under the cursor
     let scrollTicking = false
     const handleScroll = () => {
       if (scrollTicking) return
@@ -57,15 +69,11 @@ export default function CustomCursor() {
         const element = document.elementFromPoint(mouseX.get(), mouseY.get())
         if (element) {
           const isHover = !!(
-            element.tagName === 'A' ||
-            element.tagName === 'BUTTON' ||
-            element.closest('a') ||
-            element.closest('button') ||
+            element.tagName === 'A'     || element.tagName === 'BUTTON' ||
+            element.closest('a')        || element.closest('button')    ||
             element.closest('[role="button"]') ||
-            element.tagName === 'INPUT' ||
-            element.tagName === 'TEXTAREA' ||
-            element.closest('input') ||
-            element.closest('textarea')
+            element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' ||
+            element.closest('input')    || element.closest('textarea')
           )
           setIsHovered(isHover)
         }
@@ -73,22 +81,22 @@ export default function CustomCursor() {
       })
     }
 
-    window.addEventListener('mousemove', moveCursor, { passive: true })
-    document.addEventListener('mouseleave', handleMouseLeave)
-    document.addEventListener('mouseenter', handleMouseEnter)
-    window.addEventListener('mouseover', handleMouseOver, { passive: true })
-    window.addEventListener('mousedown', handleMouseDown)
-    window.addEventListener('mouseup', handleMouseUp)
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('mousemove',  moveCursor,      { passive: true })
+    document.addEventListener('mouseleave',   handleMouseLeave)
+    document.addEventListener('mouseenter',   handleMouseEnter)
+    window.addEventListener('mouseover',  handleMouseOver, { passive: true })
+    window.addEventListener('mousedown',  handleMouseDown)
+    window.addEventListener('mouseup',    handleMouseUp)
+    window.addEventListener('scroll',     handleScroll,    { passive: true })
 
     return () => {
-      window.removeEventListener('mousemove', moveCursor)
-      document.removeEventListener('mouseleave', handleMouseLeave)
-      document.removeEventListener('mouseenter', handleMouseEnter)
-      window.removeEventListener('mouseover', handleMouseOver)
-      window.removeEventListener('mousedown', handleMouseDown)
-      window.removeEventListener('mouseup', handleMouseUp)
-      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('mousemove',  moveCursor)
+      document.removeEventListener('mouseleave',   handleMouseLeave)
+      document.removeEventListener('mouseenter',   handleMouseEnter)
+      window.removeEventListener('mouseover',  handleMouseOver)
+      window.removeEventListener('mousedown',  handleMouseDown)
+      window.removeEventListener('mouseup',    handleMouseUp)
+      window.removeEventListener('scroll',     handleScroll)
     }
   }, [mouseX, mouseY])
 
@@ -96,39 +104,48 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Outer Follower Circle */}
+      {/* Outer ring — lags behind cursor with a spring trail, expands on hover */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border pointer-events-none z-50 mix-blend-difference hidden md:block"
+        className="cursor-ring fixed top-0 left-0 rounded-full border pointer-events-none z-[9999] mix-blend-difference hidden md:block"
         style={{
-          x: cursorX,
-          y: cursorY,
+          x: ringX,
+          y: ringY,
           translateX: '-50%',
           translateY: '-50%',
-          borderColor: '#FACC15',
+          borderColor: accent,
           willChange: 'transform',
         }}
         animate={{
-          scale: isClicking ? 0.75 : isHovered ? 1.75 : 1,
-          backgroundColor: isHovered ? 'rgba(250, 204, 21, 0.2)' : 'rgba(0,0,0,0)',
+          // Expands significantly when hovering a clickable element
+          width:  isHovered ? 44 : isClicking ? 22 : 32,
+          height: isHovered ? 44 : isClicking ? 22 : 32,
+          backgroundColor: isHovered ? accentAlpha : 'rgba(0,0,0,0)',
+          // Slight rotate on click for a satisfying squish feel
+          rotate: isClicking ? 12 : 0,
+          opacity: 1,
         }}
-        transition={{ type: 'tween', duration: 0.15 }}
+        transition={{ type: 'spring', stiffness: 260, damping: 22 }}
       />
-      {/* Inner Glowing Dot */}
+
+      {/* Inner dot — snaps directly to cursor position with no lag */}
       <motion.div
-        className="fixed top-0 left-0 w-2.5 h-2.5 rounded-full pointer-events-none z-50 hidden md:block"
+        className="cursor-dot fixed top-0 left-0 rounded-full pointer-events-none z-[9999] hidden md:block"
         style={{
           x: mouseX,
           y: mouseY,
           translateX: '-50%',
           translateY: '-50%',
-          backgroundColor: '#FACC15',
+          backgroundColor: accent,
           willChange: 'transform',
         }}
         animate={{
-          scale: isClicking ? 1.4 : isHovered ? 0.4 : 1,
-          backgroundColor: isHovered ? '#EAB308' : '#FACC15',
+          // Dot shrinks on hover (ring takes over) and flares on click
+          width:  isHovered ? 5 : isClicking ? 14 : 10,
+          height: isHovered ? 5 : isClicking ? 14 : 10,
+          backgroundColor: isHovered ? accentDim : accent,
+          opacity: 1,
         }}
-        transition={{ type: 'tween', duration: 0.05 }}
+        transition={{ type: 'tween', duration: 0.07 }}
       />
     </>
   )

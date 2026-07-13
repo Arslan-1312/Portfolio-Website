@@ -46,7 +46,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="relative min-h-screen bg-slate-900 text-white font-sans overflow-x-hidden selection:bg-primary-cyan/30 selection:text-white">
+    <div className="relative min-h-screen bg-slate-900 text-white font-sans overflow-x-hidden selection:bg-primary-blue/20 selection:text-primary-blue">
       {/* Interactive Background & Effects */}
       <CustomCursor />
       <ParticleBackground />

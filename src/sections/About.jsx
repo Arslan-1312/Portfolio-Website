@@ -3,6 +3,7 @@ import ReactCountUp from 'react-countup'
 const CountUp = ReactCountUp.default || ReactCountUp
 import { GraduationCap, MapPin, Heart } from 'lucide-react'
 
+// Metrics list to display inside the grid cards
 const cards = [
   { count: 2, label: 'Years Experience', suffix: '+' },
   { count: 10, label: 'Projects Developed', suffix: '+' },
@@ -11,19 +12,44 @@ const cards = [
 ]
 
 export default function About() {
+  // Stagger entry configurations for the right-hand counter card list
+  const cardContainerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.1, // Small cascade delay between card entries
+      },
+    },
+  }
+
+  // Individual counter card animations using spring vectors
+  const cardItemVariants = {
+    hidden: { opacity: 0, scale: 0.9, y: 25 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 100,
+        damping: 16,
+      },
+    },
+  }
+
   return (
     <section
       id="about"
       className="relative py-20 px-4 md:px-8 overflow-hidden z-10"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Section Heading */}
+        {/* Section Heading Area */}
         <div className="flex flex-col items-center text-center mb-16">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
             className="text-xs font-bold uppercase tracking-widest text-primary-blue"
           >
             About Me
@@ -32,7 +58,7 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
             className="text-3xl sm:text-4xl font-extrabold text-white mt-2"
           >
             Crafting Digital Solutions
@@ -41,18 +67,18 @@ export default function About() {
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.2, type: 'spring' }}
             className="w-16 h-1 bg-gradient-to-r from-primary-blue via-primary-purple to-primary-cyan mt-4 rounded-full"
           />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Description */}
+          {/* Left Column: Biography info sliding in from left */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{ type: 'spring', stiffness: 80, damping: 15 }}
             className="lg:col-span-6 space-y-6 text-left"
           >
             <h4 className="text-2xl font-bold text-white leading-snug">
@@ -68,7 +94,7 @@ export default function About() {
               I specialize in the MERN Stack (MongoDB, Express.js, React, Node.js) and frontend development. Over the past 2+ years, I have successfully transformed mockups and technical architectures into fully functional, high-performance web products.
             </p>
 
-            {/* Sub-info list */}
+            {/* Sub-info metadata layout list */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               <div className="flex items-center space-x-3 text-slate-300">
                 <div className="p-2 rounded-lg bg-white/5 text-primary-blue">
@@ -102,18 +128,25 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Right Column: Grid Counters */}
+          {/* Right Column: Grid counters staggered entrance */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            variants={cardContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-50px' }}
             className="lg:col-span-6 grid grid-cols-2 gap-4"
           >
             {cards.map((c, idx) => (
               <motion.div
                 key={idx}
-                whileHover={{ scale: 1.05, y: -4 }}
+                variants={cardItemVariants}
+                // Hover effect: gently scales up and floats metric cards up using high-performance springs
+                whileHover={{ 
+                  scale: 1.05, 
+                  y: -6,
+                  transition: { type: 'spring', stiffness: 300, damping: 15 }
+                }}
+                style={{ willChange: 'transform, opacity' }} // Forces hardware acceleration
                 className="glass-card p-6 rounded-2xl border-white/5 hover:border-primary-cyan/40 hover:bg-slate-900/60 shadow-lg text-center flex flex-col justify-center items-center transition-all duration-300 group"
               >
                 <div className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-primary-cyan via-primary-blue to-primary-purple bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
@@ -131,3 +164,4 @@ export default function About() {
     </section>
   )
 }
+

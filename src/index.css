@@ -161,3 +161,222 @@ html.lenis body {
 .animate-float-fast {
   animation: float 3s ease-in-out infinite;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT MODE GLOBAL OVERRIDES
+   Applied when <html> does NOT have the .dark class.
+   These rules fix every "dark-only" Tailwind transparent-white
+   pattern so the light theme looks polished and professional.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Global body & root container ── */
+:root:not(.dark) body,
+:root:not(.dark) #root > div {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+}
+
+/* ── Headings hardcoded as text-white ── */
+:root:not(.dark) .text-white {
+  color: var(--text-main) !important;
+}
+:root:not(.dark) .text-slate-300 {
+  color: var(--text-secondary) !important;
+}
+:root:not(.dark) .text-slate-400 {
+  color: var(--text-muted) !important;
+}
+:root:not(.dark) .text-slate-500 {
+  color: #9ca3af !important;
+}
+
+/* ── text-white-pure: always stays pure white (for button labels on colored backgrounds) ── */
+:root:not(.dark) .text-white-pure {
+  color: #ffffff !important;
+}
+
+/* ── Surfaces that use bg-white/5 (nearly invisible on white) → give them a visible tint ── */
+:root:not(.dark) .bg-white\/5,
+:root:not(.dark) [class*="bg-white/5"] {
+  background-color: rgba(79, 70, 229, 0.06) !important;
+}
+:root:not(.dark) .bg-white\/10,
+:root:not(.dark) [class*="bg-white/10"] {
+  background-color: rgba(79, 70, 229, 0.08) !important;
+}
+:root:not(.dark) .hover\:bg-white\/10:hover {
+  background-color: rgba(79, 70, 229, 0.12) !important;
+}
+
+/* ── Borders that use border-white/5, border-white/10 → give them visible indigo tint ── */
+:root:not(.dark) .border-white\/5 {
+  border-color: rgba(79, 70, 229, 0.12) !important;
+}
+:root:not(.dark) .border-white\/10 {
+  border-color: rgba(79, 70, 229, 0.16) !important;
+}
+
+/* ── bg-slate-900 / bg-slate-950 (hardcoded dark panels) → map to themed surfaces ── */
+:root:not(.dark) .bg-slate-900 {
+  background-color: var(--bg-color) !important;
+}
+:root:not(.dark) .bg-slate-950 {
+  background-color: var(--bg-slate-950) !important;
+}
+
+/* ── Opacity-combined dark panels: bg-slate-900/80, bg-slate-900/40 etc. ── */
+:root:not(.dark) [class*="bg-slate-900/"] {
+  background-color: rgba(255, 255, 255, 0.82) !important;
+}
+:root:not(.dark) [class*="bg-slate-950/"] {
+  background-color: rgba(238, 240, 246, 0.75) !important;
+}
+
+/* ── Floating tech badge panels in Hero ── */
+:root:not(.dark) .glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(79, 70, 229, 0.12);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06), 0 12px 32px -8px rgba(79, 70, 229, 0.08);
+}
+
+/* ── Navbar pill container ── */
+:root:not(.dark) header nav {
+  background-color: rgba(255, 255, 255, 0.80) !important;
+  border-color: rgba(79, 70, 229, 0.12) !important;
+  box-shadow: 0 1px 24px -4px rgba(79, 70, 229, 0.10), 0 1px 4px rgba(0,0,0,0.04) !important;
+}
+
+/* ── Skill badges (tiny pill tags) ── */
+:root:not(.dark) .text-slate-300.bg-white\/5 {
+  color: var(--text-secondary) !important;
+  background-color: rgba(79, 70, 229, 0.07) !important;
+}
+
+/* ── Portrait frame inner ring fill ── */
+:root:not(.dark) .border-slate-900 {
+  border-color: #f5f6fa !important;
+}
+
+/* ── Scrollbar in light mode ── */
+:root:not(.dark) ::-webkit-scrollbar-track {
+  background: var(--scrollbar-bg);
+}
+:root:not(.dark) ::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-color: var(--scrollbar-bg);
+}
+
+/* ── Mobile menu drawer ── */
+:root:not(.dark) header [class*="bg-slate-900"] {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(79, 70, 229, 0.12) !important;
+  box-shadow: 0 20px 60px -12px rgba(79, 70, 229, 0.15) !important;
+}
+
+/* ── Active nav pill highlight ── */
+:root:not(.dark) .bg-gradient-to-r.from-primary-blue\/20.to-primary-purple\/20 {
+  background: linear-gradient(to right, rgba(79,70,229,0.10), rgba(124,58,237,0.10)) !important;
+  border-color: rgba(79,70,229,0.25) !important;
+}
+
+/* ── Footer ── */
+:root:not(.dark) footer {
+  background-color: rgba(238, 240, 246, 0.90) !important;
+  border-color: rgba(79, 70, 229, 0.10) !important;
+}
+
+/* ── Custom cursor dot & ring: switch yellow to indigo in light mode ── */
+:root:not(.dark) .cursor-dot {
+  background-color: #4f46e5 !important;
+}
+:root:not(.dark) .cursor-ring {
+  border-color: #4f46e5 !important;
+}
+
+/* ── Experience timeline vertical border ── */
+:root:not(.dark) .border-slate-800 {
+  border-color: rgba(79, 70, 229, 0.15) !important;
+}
+
+/* ── Experience timeline dot outer ring ── */
+:root:not(.dark) .bg-slate-900.border-2 {
+  background-color: #ffffff !important;
+}
+
+/* ── Skills icon wrapper: bg-slate-900 on hover ── */
+:root:not(.dark) .group-hover\:bg-slate-900 {
+  background-color: rgba(79, 70, 229, 0.08) !important;
+}
+
+/* ── Contact form input fields ── */
+:root:not(.dark) input,
+:root:not(.dark) textarea {
+  background-color: rgba(255, 255, 255, 0.90) !important;
+  border-color: rgba(79, 70, 229, 0.18) !important;
+  color: var(--text-main) !important;
+}
+:root:not(.dark) input::placeholder,
+:root:not(.dark) textarea::placeholder {
+  color: #9ca3af !important;
+}
+:root:not(.dark) input:focus,
+:root:not(.dark) textarea:focus {
+  background-color: #ffffff !important;
+  border-color: rgba(79, 70, 229, 0.55) !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.10) !important;
+}
+
+/* ── Certifications card color band backgrounds adapt to light mode ── */
+:root:not(.dark) [class*="bg-gradient-to-br"] .glass-card,
+:root:not(.dark) .bg-gradient-to-br {
+  --tw-gradient-from-opacity: 0.06;
+  --tw-gradient-to-opacity: 0.04;
+}
+
+/* ── Projects filter pills (light mode active state) ── */
+:root:not(.dark) button[class*="from-primary"] {
+  box-shadow: 0 2px 12px rgba(79, 70, 229, 0.22);
+}
+
+/* ── Section background alternation: give every other section a barely-visible tint ── */
+:root:not(.dark) #skills,
+:root:not(.dark) #certifications,
+:root:not(.dark) #contact {
+  background-color: rgba(238, 240, 246, 0.50);
+}
+
+/* ── Hero profile portrait ring background ── */
+:root:not(.dark) .rounded-full.bg-slate-950 {
+  background-color: var(--bg-color) !important;
+}
+
+/* ── Back to Top button ── */
+:root:not(.dark) .fixed.bottom-8.right-8 {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(79, 70, 229, 0.30) !important;
+  color: var(--theme-primary-blue) !important;
+  box-shadow: 0 4px 20px rgba(79, 70, 229, 0.15) !important;
+}
+
+/* ── AmbientBlobs: reduce opacity in light mode to prevent washing out content ── */
+:root:not(.dark) [class*="fixed inset-0"][class*="opacity-30"] {
+  opacity: 0.18 !important;
+}
+
+/* ── General ring/divider elements ── */
+:root:not(.dark) .divide-white\/5 > * + * {
+  border-color: rgba(79, 70, 229, 0.10) !important;
+}
+
+/* ── Gradient text: ensure clipped gradients don't turn black ── */
+:root:not(.dark) .bg-clip-text.text-transparent {
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* ── Hover text-white on social buttons ── */
+:root:not(.dark) .hover\:text-white:hover {
+  color: var(--text-main) !important;
+}
+
+
+

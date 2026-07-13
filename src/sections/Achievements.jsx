@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
-import { Award, Heart, Shield, Star, Users, Trophy } from 'lucide-react'
+import { Award, Heart, Shield, Users } from 'lucide-react'
 
+// Array holding only the remaining two achievements (Advocacy and Mentorship)
 const achievementsData = [
   {
     icon: Heart,
@@ -11,32 +12,8 @@ const achievementsData = [
     tags: ['Leadership', 'Social Impact', 'Community Organizing'],
     color: 'text-rose-500',
     bgColor: 'bg-rose-500/10',
-    glowColor: 'group-hover:bg-rose-500/10',
+    glowColor: 'group-hover:bg-rose-500/15',
     borderColor: 'hover:border-rose-500/30',
-  },
-  {
-    icon: Trophy,
-    title: 'Top 3 Hackathon Competitor',
-    subtitle: 'Hackta Connect Pvt Ltd',
-    description:
-      'Ranked in the top 3 teams in a regional hackathon by designing and building a functional prototype of a geo-tagged incident reporting mobile app helper using React Native and Express API in 24 hours.',
-    tags: ['Hackathon', 'Rapid Prototyping', 'React Native'],
-    color: 'text-amber-500',
-    bgColor: 'bg-amber-500/10',
-    glowColor: 'group-hover:bg-amber-500/10',
-    borderColor: 'hover:border-amber-500/30',
-  },
-  {
-    icon: Star,
-    title: 'Deans Honor List',
-    subtitle: 'Hazara University, Mansehra',
-    description:
-      'Consistently recognized on the academic honor roll for achieving high grades (GPA 3.75+) in the Software Engineering undergraduate program, showcasing dedication and rigorous study habits.',
-    tags: ['Academic Excellence', 'Computer Science', 'Software Engineering'],
-    color: 'text-primary-cyan',
-    bgColor: 'bg-primary-cyan/10',
-    glowColor: 'group-hover:bg-primary-cyan/10',
-    borderColor: 'hover:border-primary-cyan/30',
   },
   {
     icon: Users,
@@ -47,79 +24,87 @@ const achievementsData = [
     tags: ['Open Source', 'Mentorship', 'Web Tech'],
     color: 'text-primary-purple',
     bgColor: 'bg-primary-purple/10',
-    glowColor: 'group-hover:bg-primary-purple/10',
+    glowColor: 'group-hover:bg-primary-purple/15',
     borderColor: 'hover:border-primary-purple/30',
   },
 ]
 
 export default function Achievements() {
+  // Stagger animation container to trigger card entrances sequentially
   const containerVariants = {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.15, // Delay between each consecutive child card entrance
       },
     },
   }
 
+  // Individual card spring-physics animation settings for buttery smooth GPU-accelerated transition
   const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { 
+      opacity: 0, 
+      y: 40,
+    },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         type: 'spring',
-        stiffness: 100,
-        damping: 15,
+        stiffness: 110, // Adjusts the speed of the bounce
+        damping: 18,     // Absorbs the bounce for a refined, premium feel
       },
     },
   }
 
   return (
     <section id="achievements" className="relative py-20 px-4 md:px-8 overflow-hidden z-10">
-      {/* Decorative Blob */}
+      {/* Dynamic ambient background blob for extra section visual depth */}
       <div className="absolute top-1/3 right-10 w-96 h-96 rounded-full bg-primary-cyan/5 blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto">
-        {/* Section Heading */}
+        {/* Section Heading Area */}
         <div className="flex flex-col items-center text-center mb-16">
+          {/* Subtle icon badge gliding up smoothly */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
             className="flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-primary-cyan"
           >
             <Shield className="w-4 h-4 text-primary-cyan" />
             <span>Honors</span>
           </motion.div>
 
+          {/* Heading title fading and gliding in */}
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
             className="text-3xl sm:text-4xl font-extrabold text-white mt-2"
           >
             Key Achievements
           </motion.h3>
 
+          {/* Glowing bottom line stretching out */}
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.2, type: 'spring' }}
             className="w-16 h-1 bg-gradient-to-r from-primary-cyan via-primary-blue to-primary-purple mt-4 rounded-full"
           />
         </div>
 
-        {/* Grid Layout */}
+        {/* Responsive Grid layout for remaining cards (Maximum 2 columns) */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto"
         >
           {achievementsData.map((ach, idx) => {
             const IconComponent = ach.icon
@@ -127,14 +112,22 @@ export default function Achievements() {
               <motion.div
                 key={idx}
                 variants={cardVariants}
-                className={`group glass-card p-8 rounded-2xl border border-white/5 transition-all duration-300 ${ach.borderColor} hover:shadow-2xl relative overflow-hidden flex flex-col justify-between`}
+                // Hover effect: Glides card up slightly and scales it using premium spring scaling
+                whileHover={{ 
+                  y: -8, 
+                  scale: 1.025,
+                  transition: { type: 'spring', stiffness: 300, damping: 20 }
+                }}
+                className={`group glass-card p-8 rounded-2xl border border-white/5 transition-colors duration-300 ${ach.borderColor} hover:shadow-2xl relative overflow-hidden flex flex-col justify-between`}
+                style={{ willChange: 'transform, opacity' }} // Forces hardware acceleration
               >
-                {/* Background glow animation */}
+                {/* Background glow atmosphere circle appearing on card hover */}
                 <div className={`absolute -bottom-20 -right-20 w-44 h-44 rounded-full bg-white/0 blur-3xl transition-all duration-500 pointer-events-none ${ach.glowColor}`} />
 
                 <div className="text-left relative z-10 flex-grow">
                   <div className="flex items-start gap-4 mb-5">
-                    <div className={`p-4 rounded-2xl ${ach.bgColor} ${ach.color} border border-white/5 shadow-inner`}>
+                    {/* Glowing icon wrapper scaling up on card hover */}
+                    <div className={`p-4 rounded-2xl ${ach.bgColor} ${ach.color} border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300`}>
                       <IconComponent className="w-6 h-6" />
                     </div>
                     <div>
@@ -152,7 +145,7 @@ export default function Achievements() {
                   </p>
                 </div>
 
-                {/* Tags bottom container */}
+                {/* Tag badges container at the bottom */}
                 <div className="flex flex-wrap gap-2 mt-auto border-t border-white/5 pt-4 relative z-10 text-left">
                   {ach.tags.map((tag) => (
                     <span
@@ -171,3 +164,4 @@ export default function Achievements() {
     </section>
   )
 }
+
