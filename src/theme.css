@@ -1,7 +1,7 @@
 /* ─────────────────────────────────────────────────────────────
    CSS Design Tokens — Professional Dual-Theme System
    Light  → Indigo / Violet / Cyan  (Refined, Trustworthy)
-   Dark   → Amber / Yellow          (Rich, High-contrast)
+   Dark   → Indigo / Violet / Cyan  (Vibrant, Digital Premium)
    ───────────────────────────────────────────────────────────── */
 
 :root {
@@ -42,7 +42,7 @@
 }
 
 :root.dark {
-  /* Dark Mode Colors (Black and Dark Yellow) */
+  /* Dark Mode Colors (Black and Indigo/Violet/Cyan) */
   --bg-color: #000000; /* Pure Black background */
   --bg-slate-950: #0a0a0a; /* Very dark gray for sections */
   
@@ -53,21 +53,21 @@
   --card-bg: rgba(10, 10, 10, 0.6);
   --card-border: rgba(255, 255, 255, 0.05);
   --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
-  --card-hover-border: rgba(234, 179, 8, 0.3); /* Dark Yellow border on hover */
-  --card-hover-shadow: 0 20px 40px -15px rgba(234, 179, 8, 0.2);
+  --card-hover-border: rgba(6, 182, 212, 0.35); /* Cyber cyan border on hover */
+  --card-hover-shadow: 0 20px 40px -15px rgba(139, 92, 246, 0.25); /* Violet shadow bloom */
 
-  /* Primary accents for Dark mode (Variations of Dark Yellow) */
-  --theme-primary-blue: #b45309; /* Amber 700 (Very Dark Yellow) */
-  --theme-primary-purple: #ca8a04; /* Yellow 600 (Dark Yellow) */
-  --theme-primary-cyan: #eab308; /* Yellow 500 (Medium Yellow) */
+  /* Primary accents for Dark mode (Vibrant digital colors) */
+  --theme-primary-blue: #4f46e5; /* Indigo */
+  --theme-primary-purple: #8b5cf6; /* Violet */
+  --theme-primary-cyan: #06b6d4; /* Electric Cyan */
   
-  --particle-color-1: rgba(234, 179, 8, 0.12);
-  --particle-color-2: rgba(202, 138, 4, 0.12);
-  --particle-color-3: rgba(180, 83, 9, 0.12);
+  --particle-color-1: rgba(79, 70, 229, 0.12);
+  --particle-color-2: rgba(139, 92, 246, 0.12);
+  --particle-color-3: rgba(6, 182, 212, 0.12);
   
-  --scrollbar-bg: #000000;
-  --scrollbar-thumb: rgba(234, 179, 8, 0.25);
-  --scrollbar-thumb-hover: rgba(234, 179, 8, 0.5);
+  --scrollbar-bg: #030712;
+  --scrollbar-thumb: rgba(139, 92, 246, 0.25);
+  --scrollbar-thumb-hover: rgba(6, 182, 212, 0.5);
   
   --blob-opacity: 0.25;
 }

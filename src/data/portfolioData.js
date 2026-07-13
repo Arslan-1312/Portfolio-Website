@@ -158,8 +158,8 @@ export const certificationsData = [
     issuer: 'DigiSkills.pk',
     date: '2026',
     credentialId: 'FXT2XSMMK',
-    color: 'from-yellow-500/20 to-amber-500/20',
-    borderColor: 'group-hover:border-yellow-500/40',
+    color: 'from-indigo-500/20 to-purple-500/20',
+    borderColor: 'group-hover:border-indigo-500/40',
   },
   {
     title: 'Search Engine Optimization (SEO) with Squarespace',

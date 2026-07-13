@@ -20,10 +20,10 @@ export default function CustomCursor() {
     return () => observer.disconnect()
   }, [])
 
-  // Cursor accent: yellow in dark, indigo in light
-  const accent      = isDark ? '#FACC15' : '#4f46e5'
-  const accentDim   = isDark ? '#EAB308' : '#6d62f5'
-  const accentAlpha = isDark ? 'rgba(250,204,21,0.15)' : 'rgba(79,70,229,0.12)'
+  // Cursor accent: electric cyan in dark, indigo in light
+  const accent      = isDark ? '#06b6d4' : '#4f46e5'
+  const accentDim   = isDark ? '#0891b2' : '#6d62f5'
+  const accentAlpha = isDark ? 'rgba(6,182,212,0.15)' : 'rgba(79,70,229,0.12)'
 
   // Raw mouse position values (no easing — pure pixel coordinates)
   const mouseX = useMotionValue(-100)
